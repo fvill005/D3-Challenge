@@ -59,6 +59,7 @@ d3.csv("assets/data.csv").then(function(data) {
         .append("circle")
         .attr("cx", d => xLinearScale(d.age))
         .attr("cy", d => yLinearScale(d.smokes))
+        .attr("transform",`translate(${d.abbr, 30})`)
         .attr("r", "15")
         .attr("fill", "cadetblue")
         .attr("opacity", ".5");
