@@ -59,10 +59,30 @@ d3.csv("assets/data.csv").then(function(data) {
         .append("circle")
         .attr("cx", d => xLinearScale(d.age))
         .attr("cy", d => yLinearScale(d.smokes))
-        .attr("transform",`translate(${d.abbr, 30})`)
+        //.attr("transform",`translate(${d.abbr, 30})`)
         .attr("r", "15")
         .attr("fill", "cadetblue")
         .attr("opacity", ".5");
+
+        var textsGroup = chartGroup.selectAll("text")
+        .data(data)
+        .enter()
+        // We return the abbreviation to .text, which makes the text the abbreviation.
+        .append("text")
+        .text(function(d) {
+          return d.abbr;
+        })
+        // Now place the text using our scale.
+        .attr("dx", function(d) {
+          return xLinearScale(d.age);
+        })
+        .attr("dy", function(d) {
+              return yLinearScale(d.smokes);
+        })
+        .attr("class", "stateText")
+        .attr("font-size", 9);
+
+        
 
         //adding label for y-axis
     chartGroup.append("text")
